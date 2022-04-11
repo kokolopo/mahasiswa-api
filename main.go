@@ -32,6 +32,8 @@ func main() {
 	api := e.Group("/api/v1")
 	api.POST("/mahasiswa", mhsController.RegisterMhs)
 	api.POST("/matakuliah", mtkController.CreateNew)
+	api.GET("/matakuliah", mtkController.GetAll)
+	api.GET("/matakuliah/:id", mtkController.GetById)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
