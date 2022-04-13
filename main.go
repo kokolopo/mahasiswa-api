@@ -1,11 +1,9 @@
 package main
 
 import (
-	"mahasiswa-api/controller"
-	"mahasiswa-api/mahasiswa"
-	"mahasiswa-api/matakuliah"
+	"fmt"
+	"mahasiswa-api/nilai"
 
-	"github.com/labstack/echo/v4"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -19,21 +17,30 @@ func main() {
 	// fmt.Println("berhasil koneksi ke database")
 
 	// domain mahasiswa
-	mhsRepository := mahasiswa.NewMahasiswaRepository(db)
-	mhsService := mahasiswa.NewMahasiswaService(mhsRepository)
-	mhsController := controller.NewMahasiswaController(mhsService)
+	// mhsRepository := mahasiswa.NewMahasiswaRepository(db)
+	// mhsService := mahasiswa.NewMahasiswaService(mhsRepository)
+	// mhsController := controller.NewMahasiswaController(mhsService)
 
-	// domain matakuliah
-	mtkRepository := matakuliah.NewMatkulRepository(db)
-	mtkService := matakuliah.NewMatkulService(mtkRepository)
-	mtkController := controller.NewMatakuliahController(mtkService)
+	// // domain matakuliah
+	// mtkRepository := matakuliah.NewMatkulRepository(db)
+	// mtkService := matakuliah.NewMatkulService(mtkRepository)
+	// mtkController := controller.NewMatakuliahController(mtkService)
 
-	e := echo.New()
-	api := e.Group("/api/v1")
-	api.POST("/mahasiswa", mhsController.RegisterMhs)
-	api.POST("/matakuliah", mtkController.CreateNew)
-	api.GET("/matakuliah", mtkController.GetAll)
-	api.GET("/matakuliah/:id", mtkController.GetById)
+	// e := echo.New()
+	// api := e.Group("/api/v1")
+	// api.POST("/mahasiswa", mhsController.RegisterMhs)
+	// api.POST("/matakuliah", mtkController.CreateNew)
+	// api.GET("/matakuliah", mtkController.GetAll)
+	// api.GET("/matakuliah/:id", mtkController.GetById)
 
-	e.Logger.Fatal(e.Start(":8080"))
+	// e.Logger.Fatal(e.Start(":8080"))
+
+	nilaiRepo := nilai.NewNilaiRepository(db)
+	nilaiService := nilai.NewNilaiService(nilaiRepo)
+
+	data, err := nilaiService.GetAll()
+
+	for _, v := range data {
+		fmt.Println(v)
+	}
 }
