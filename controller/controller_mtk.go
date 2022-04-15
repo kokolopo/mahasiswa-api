@@ -44,12 +44,14 @@ func (h *mtkController) GetAll(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, res)
 	}
 
-	var slice []interface{}
+	// wadah response formatter
+	var formatResponse []interface{}
+
 	for _, v := range matkuls {
-		slice = append(slice, matakuliah.ConvertResponse(v))
+		formatResponse = append(formatResponse, matakuliah.ConvertResponse(v))
 	}
 
-	res := helper.ResponseFormat("All Matakuliah Data", http.StatusOK, "success", slice)
+	res := helper.ResponseFormat("All Matakuliah Data", http.StatusOK, "success", formatResponse)
 
 	return c.JSON(http.StatusCreated, res)
 }

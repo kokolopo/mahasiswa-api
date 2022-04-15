@@ -45,6 +45,7 @@ func (s *service) GetAll() ([]NilaiDataResponse, error) {
 		return sliceNilai, err
 	}
 
+	//harusnya ini masukin ke helper
 	for i := range nilais {
 		mhs, _ := s.repository.FindMhsByNpm(nilais[i].NPMMahasiswa)
 
@@ -62,4 +63,10 @@ func (s *service) GetAll() ([]NilaiDataResponse, error) {
 	}
 
 	return sliceNilai, nil
+}
+
+func (s *service) UpdateNilai(id int) (Nilai, error) {
+	var nilai Nilai
+
+	return nilai, nil
 }
