@@ -24,13 +24,6 @@ func (s *nilaiController) GetAllNilai(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, res)
 	}
 
-	// wadah response formatter
-	// var formatResponse []interface{}
-
-	// for _, v := range nilais {
-	// 	formatResponse = append(formatResponse, matakuliah.ConvertResponse(v))
-	// }
-
 	res := helper.ResponseFormat("All Matakuliah Data", http.StatusOK, "success", nilais)
 
 	return c.JSON(http.StatusOK, res)
