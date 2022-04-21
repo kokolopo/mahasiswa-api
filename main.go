@@ -12,6 +12,7 @@ import (
 )
 
 func main() {
+	//koneksi ke database
 	dsn := "root:@tcp(127.0.0.1:3306)/kuliah?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
@@ -36,20 +37,18 @@ func main() {
 
 	e := echo.New()
 	api := e.Group("/api/v1")
+
+	//route mahasiswa
 	api.POST("/mahasiswa", mhsController.RegisterMhs)
+
+	//route matakuliah
 	api.POST("/matakuliah", mtkController.CreateNew)
 	api.GET("/matakuliah", mtkController.GetAll)
 	api.GET("/matakuliah/:id", mtkController.GetById)
+
+	//route nilai
 	api.GET("/nilai", nilaiController.GetAllNilai)
 
 	e.Logger.Fatal(e.Start(":8080"))
 
-	// nilaiRepo := nilai.NewNilaiRepository(db)
-	// nilaiService := nilai.NewNilaiService(nilaiRepo)
-
-	// data, err := nilaiService.GetAll()
-
-	// for _, v := range data {
-	// 	fmt.Println(v)
-	// }
 }
